@@ -75,15 +75,14 @@ public class Grafo {
         int[] excentricidades = new int[numNodos];
         for (int i = 0; i < numNodos; i++) {
             int max = 0;
-            boolean tieneConexion = false; // Verificar si el nodo tiene al menos una conexión
+            boolean tieneConexion = false; 
             for (int j = 0; j < numNodos; j++) {
                 if (distancias[i][j] != INF) {
                     tieneConexion = true;
                     max = Math.max(max, distancias[i][j]);
                 }
             }
-            excentricidades[i] = tieneConexion ? max : INF; // Si no tiene conexión, excentricidad es INF
-            System.out.println("Excentricidad de " + nombresNodos[i] + ": " + excentricidades[i]);
+            excentricidades[i] = tieneConexion ? max : INF; 
         }
 
         int centro = -1;
@@ -97,7 +96,7 @@ public class Grafo {
 
         if (centro == -1) {
             System.out.println("No hay centro en el grafo (todos los nodos son inaccesibles).");
-            return null; // Si no hay centro, devolver null
+            return null; 
         }
 
         System.out.println("Centro del grafo: " + nombresNodos[centro]);
