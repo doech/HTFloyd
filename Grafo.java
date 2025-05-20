@@ -1,6 +1,6 @@
 public class Grafo {
-    private final int INF = 99999; // infinito para representar la ausencia de conexión
-    private int[][] distancias;
+    private final int INF = 9999999; // infinito para representar la ausencia de conexión
+    protected int[][] distancias;
     private int[][] camino;
     private String[] nombresNodos;
     private int numNodos;
@@ -75,20 +75,36 @@ public class Grafo {
         int[] excentricidades = new int[numNodos];
         for (int i = 0; i < numNodos; i++) {
             int max = 0;
+            boolean tieneConexion = false; // Verificar si el nodo tiene al menos una conexión
             for (int j = 0; j < numNodos; j++) {
-                if (distancias[i][j] != INF && distancias[i][j] > max) {
-                    max = distancias[i][j];
+                if (distancias[i][j] != INF) {
+                    tieneConexion = true;
+                    max = Math.max(max, distancias[i][j]);
                 }
             }
-            excentricidades[i] = max;
+            excentricidades[i] = tieneConexion ? max : INF; // Si no tiene conexión, excentricidad es INF
+            System.out.println("Excentricidad de " + nombresNodos[i] + ": " + excentricidades[i]);
         }
 
-        int centro = 0;
-        for (int i = 1; i < numNodos; i++) {
-            if (excentricidades[i] < excentricidades[centro]) {
+        int centro = -1;
+        int menorExcentricidad = INF;
+        for (int i = 0; i < numNodos; i++) {
+            if (excentricidades[i] < menorExcentricidad) {
+                menorExcentricidad = excentricidades[i];
                 centro = i;
             }
         }
+
+        if (centro == -1) {
+            System.out.println("No hay centro en el grafo (todos los nodos son inaccesibles).");
+            return null; // Si no hay centro, devolver null
+        }
+
+        System.out.println("Centro del grafo: " + nombresNodos[centro]);
         return nombresNodos[centro];
+    }
+
+    public int getDistancia(int origen, int destino) {
+        return distancias[origen][destino];
     }
 }
