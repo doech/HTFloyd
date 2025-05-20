@@ -9,7 +9,7 @@ public class Main {
         grafo.setNombreNodo(3, "Quetzaltenango");      // D
         grafo.setNombreNodo(4, "Cobán");               // E
 
-        // conexiones (ejemplo con distancias inventadas)
+        // conexiones 
         grafo.agregarArco(0, 1, 3); // A -> B
         grafo.agregarArco(0, 3, 7); // A -> D
         grafo.agregarArco(1, 2, 1); // B -> C
